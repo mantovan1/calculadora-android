@@ -2,9 +2,11 @@ package com.example.calculadoraapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_2;
     Button btn_1;
     Button btn_0;
+    Button btnPoint;
 
     Button btn_divisao;
     Button btn_multiplicacao;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn_clear;
     Button btn_calculo;
+
+    ImageButton ibBackspace;
 
     ArrayList <Double> numbers = new ArrayList<Double>();
     ArrayList <Character> operators = new ArrayList<Character>();
@@ -50,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+
+        setRequestedOrientation(1);
 
         carregarComponentes();
 
@@ -123,6 +130,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnPoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validateDigit('.');
+            }
+        });
+
         btn_divisao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,6 +182,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ibBackspace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = tv_expressao.getText().toString();
+                if (text.length() > 0) tv_expressao.setText(text.substring(0, text.length() - 1));
+            }
+        });
+
     }
 
     public void carregarComponentes() {
@@ -189,9 +211,12 @@ public class MainActivity extends AppCompatActivity {
         btn_multiplicacao = (Button) findViewById(R.id.btn_multiplicacao);
         btn_subtracao = (Button) findViewById(R.id.btn_subtracao);
         btn_adicao = (Button) findViewById(R.id.btn_adicao);
+        btnPoint = (Button) findViewById(R.id.btnPoint);
 
         btn_calculo = (Button) findViewById(R.id.btn_calcular);
         btn_clear = (Button) findViewById(R.id.btn_clear);
+
+        ibBackspace = (ImageButton) findViewById(R.id.ibBackspace);
 
     }
 
