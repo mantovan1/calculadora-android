@@ -10,15 +10,22 @@
         android:layout_height="350sp"
         android:gravity="bottom">
 
-        <TextView
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            >
+
+            <TextView
             android:id="@+id/tv_expressao"
             android:layout_width="match_parent"
-            android:layout_height="80sp"
+            android:layout_height="match_parent"
             android:background="@color/gray"
             android:textAlignment="center"
             android:gravity="center_vertical"
             android:textSize="40sp"
             android:text="" />
+
+        </ScrollView>
 
     </LinearLayout>
 
@@ -44,15 +51,16 @@
                 android:textSize="30sp"
                 android:text="c"/>
 
-            <Button
-
+            <ImageButton
+                android:id="@+id/ibBackspace"
                 android:layout_width="80sp"
                 android:layout_height="80sp"
                 android:layout_marginHorizontal="5sp"
                 android:backgroundTint="@color/gray"
                 android:textColor="@color/orange"
                 android:textSize="30sp"
-                android:text="."/>
+                android:text="."
+                android:src="@drawable/backspace" />
 
             <Button
                 android:layout_width="80sp"
@@ -246,6 +254,7 @@
                 android:text="0"/>
 
             <Button
+                android:id="@+id/btnPoint"
                 android:layout_width="80sp"
                 android:layout_height="80sp"
                 android:layout_marginHorizontal="5sp"
