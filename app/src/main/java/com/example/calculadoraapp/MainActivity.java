@@ -6,49 +6,44 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView tv_expressao;
+    TextView tvExpressao;
 
-    Button btn_9;
-    Button btn_8;
-    Button btn_7;
-    Button btn_6;
-    Button btn_5;
-    Button btn_4;
-    Button btn_3;
-    Button btn_2;
-    Button btn_1;
-    Button btn_0;
-    Button btnPoint;
+    Button btn9;
+    Button btn8;
+    Button btn7;
+    Button btn6;
+    Button btn5;
+    Button btn4;
+    Button btn3;
+    Button btn2;
+    Button btn1;
+    Button btn0;
+    Button btnPonto;
 
-    Button btn_divisao;
-    Button btn_multiplicacao;
-    Button btn_subtracao;
-    Button btn_adicao;
+    Button btnDivisao;
+    Button btnMultiplicacao;
+    Button btnSubtracao;
+    Button btnAdicao;
 
-    Button btn_clear;
-    Button btn_calculo;
+    Button btnPotencia;
 
-    ImageButton ibBackspace;
+    Button btnLimpar;
+    Button btnCalcular;
 
-    ArrayList <Double> numbers = new ArrayList<Double>();
-    ArrayList <Character> operators = new ArrayList<Character>();
+    Button btnDeletar;
 
-    String lastDigit = "";
+    ArrayList <Double> numeros = new ArrayList<Double>();
+    ArrayList <Character> operadores = new ArrayList<Character>();
 
-    //char operator;
-
-    Calcs calcs = new Calcs();
-
-    double resultado = 0;
+    String ultimoDigito = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,137 +51,145 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-        setRequestedOrientation(1);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         carregarComponentes();
 
-        btn_9.setOnClickListener(new View.OnClickListener() {
+        btn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('9');
+                validarDigito('9');
             }
         });
 
-        btn_8.setOnClickListener(new View.OnClickListener() {
+        btn8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('8');
+                validarDigito('8');
             }
         });
 
-        btn_7.setOnClickListener(new View.OnClickListener() {
+        btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('7');
+                validarDigito('7');
             }
         });
 
-        btn_6.setOnClickListener(new View.OnClickListener() {
+        btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('6');
+                validarDigito('6');
             }
         });
 
-        btn_5.setOnClickListener(new View.OnClickListener() {
+        btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('5');
+                validarDigito('5');
             }
         });
 
-        btn_4.setOnClickListener(new View.OnClickListener() {
+        btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('4');
+                validarDigito('4');
             }
         });
 
-        btn_3.setOnClickListener(new View.OnClickListener() {
+        btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('3');
+                validarDigito('3');
             }
         });
 
-        btn_2.setOnClickListener(new View.OnClickListener() {
+        btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('2');
+                validarDigito('2');
             }
         });
 
-        btn_1.setOnClickListener(new View.OnClickListener() {
+        btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('1');
+                validarDigito('1');
             }
         });
 
-        btn_0.setOnClickListener(new View.OnClickListener() {
+        btn0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('0');
+                validarDigito('0');
             }
         });
 
-        btnPoint.setOnClickListener(new View.OnClickListener() {
+        btnPonto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('.');
+                validarDigito('.');
             }
         });
 
-        btn_divisao.setOnClickListener(new View.OnClickListener() {
+        btnPotencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('÷');
+                validarDigito('^');
             }
         });
 
-        btn_multiplicacao.setOnClickListener(new View.OnClickListener() {
+        btnDivisao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('×');
+                validarDigito('÷');
             }
         });
 
-        btn_subtracao.setOnClickListener(new View.OnClickListener() {
+        btnMultiplicacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('-');
+                validarDigito('×');
             }
         });
 
-        btn_adicao.setOnClickListener(new View.OnClickListener() {
+        btnSubtracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateDigit('+');
+                validarDigito('-');
             }
         });
 
-        btn_calculo.setOnClickListener(new View.OnClickListener() {
+        btnAdicao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validarDigito('+');
+            }
+        });
+
+        btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 calcular();
             }
         });
 
-        btn_clear.setOnClickListener(new View.OnClickListener() {
+        btnLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv_expressao.setText("");
-                resultado = 0;
-                numbers.clear();
-                operators.clear();
+
+                tvExpressao.setText("");
+                ultimoDigito = "";
+                
+                numeros.clear();
+                operadores.clear();
             }
         });
 
-        ibBackspace.setOnClickListener(new View.OnClickListener() {
+        btnDeletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = tv_expressao.getText().toString();
-                if (text.length() > 0) tv_expressao.setText(text.substring(0, text.length() - 1));
+                //ainda irei implementar
             }
         });
 
@@ -194,80 +197,111 @@ public class MainActivity extends AppCompatActivity {
 
     public void carregarComponentes() {
 
-        tv_expressao = (TextView) findViewById(R.id.tv_expressao);
+        tvExpressao = (TextView) findViewById(R.id.tvExpressao);
 
-        btn_9 = (Button) findViewById(R.id.btn_9);
-        btn_8 = (Button) findViewById(R.id.btn_8);
-        btn_7 = (Button) findViewById(R.id.btn_7);
-        btn_6 = (Button) findViewById(R.id.btn_6);
-        btn_5 = (Button) findViewById(R.id.btn_5);
-        btn_4 = (Button) findViewById(R.id.btn_4);
-        btn_3 = (Button) findViewById(R.id.btn_3);
-        btn_2 = (Button) findViewById(R.id.btn_2);
-        btn_1 = (Button) findViewById(R.id.btn_1);
-        btn_0 = (Button) findViewById(R.id.btn_0);
+        btn9 = (Button) findViewById(R.id.btn9);
+        btn8 = (Button) findViewById(R.id.btn8);
+        btn7 = (Button) findViewById(R.id.btn7);
+        btn6 = (Button) findViewById(R.id.btn6);
+        btn5 = (Button) findViewById(R.id.btn5);
+        btn4 = (Button) findViewById(R.id.btn4);
+        btn3 = (Button) findViewById(R.id.btn3);
+        btn2 = (Button) findViewById(R.id.btn2);
+        btn1 = (Button) findViewById(R.id.btn1);
+        btn0 = (Button) findViewById(R.id.btn0);
 
-        btn_divisao = (Button) findViewById(R.id.btn_divisao);
-        btn_multiplicacao = (Button) findViewById(R.id.btn_multiplicacao);
-        btn_subtracao = (Button) findViewById(R.id.btn_subtracao);
-        btn_adicao = (Button) findViewById(R.id.btn_adicao);
-        btnPoint = (Button) findViewById(R.id.btnPoint);
+        btnDivisao = (Button) findViewById(R.id.btnDivisao);
+        btnMultiplicacao = (Button) findViewById(R.id.btnMultiplicacao);
+        btnSubtracao = (Button) findViewById(R.id.btnSubtracao);
+        btnAdicao = (Button) findViewById(R.id.btnAdicao);
 
-        btn_calculo = (Button) findViewById(R.id.btn_calcular);
-        btn_clear = (Button) findViewById(R.id.btn_clear);
+        btnPotencia = (Button) findViewById(R.id.btnPotencia);
 
-        ibBackspace = (ImageButton) findViewById(R.id.ibBackspace);
+        btnPonto = (Button) findViewById(R.id.btnPonto);
+
+        btnCalcular = (Button) findViewById(R.id.btnCalcular);
+        btnLimpar = (Button) findViewById(R.id.btnLimpar);
+
+        btnDeletar = (Button) findViewById(R.id.btnDeletar);
 
     }
 
-    public void validateDigit(char digit) {
+    public void validarDigito(char digito) {
+
+        char ultimoCaractere = ' ';
+
+        try {
+            ultimoCaractere = tvExpressao.getText().toString().charAt(tvExpressao.getText().toString().length()-1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (
-                (digit != '+') &&
-                (digit != '-') &&
-                (digit != '×') &&
-                (digit != '÷')
+                (digito != '+') &&
+                (digito != '-') &&
+                (digito != '×') &&
+                (digito != '÷') &&
+                (digito != '^')
         ) {
 
-            lastDigit += digit;
-            tv_expressao.setText(tv_expressao.getText().toString() + digit);
+            ultimoDigito += digito;
+            tvExpressao.setText(tvExpressao.getText().toString() + digito);
             
-        } else {
+        } else if (ultimoDigito == "" && digito == '-'){
 
-                if(lastDigit!="") {
-                    numbers.add(Double.parseDouble(lastDigit));
-                    lastDigit = "";
-                }
+            if(ultimoCaractere != '-') {
+                ultimoDigito += digito;
+                tvExpressao.setText(tvExpressao.getText().toString() + digito);
+            } else {
+                return;
+            }
 
-                validateOperator(digit);
+        } else if (ultimoCaractere == '-' && digito == '+') {
 
-                //System.out.println(numbers.toString());
+            String text = tvExpressao.getText().toString();
 
+            tvExpressao.setText(text.substring(0, text.length()-1));
 
+            operadores.remove(operadores.size()-1);
+            operadores.add('+');
+
+            tvExpressao.setText(tvExpressao.getText().toString() + '+');
+
+        } else if (ultimoDigito != ""){
+
+            if(ultimoCaractere != '-') {
+
+                numeros.add(Double.parseDouble(ultimoDigito));
+                ultimoDigito = "";
+
+                validarOperador(digito);
+
+            } else {
+                return;
+            }
 
         }
     }
 
-    public void validateOperator(char operator) {
+    public void validarOperador(char operador) {
 
-        char last_char;
+        char ultimoCaractere;
 
-        if (tv_expressao.getText().toString() != "") {
+        if (tvExpressao.getText().toString() != "") {
 
-            last_char = tv_expressao.getText().toString().charAt(tv_expressao.getText().toString().length()-1);
+            ultimoCaractere = tvExpressao.getText().toString().charAt(tvExpressao.getText().toString().length()-1);
 
             if (
-                    (last_char != '+') &&
-                    (last_char != '-') &&
-                    (last_char != '×') &&
-                    (last_char != '÷')
+                    (ultimoCaractere != '+') &&
+                    (ultimoCaractere != '-') &&
+                    (ultimoCaractere != '×') &&
+                    (ultimoCaractere != '÷') &&
+                    (ultimoCaractere != '^')
             ) {
 
-                tv_expressao.setText(tv_expressao.getText().toString() + operator);
+                tvExpressao.setText(tvExpressao.getText().toString() + operador);
 
-                operators.add(operator);
-
-                //System.out.println(operators.toString());
+                operadores.add(operador);
 
             }
 
@@ -277,75 +311,96 @@ public class MainActivity extends AppCompatActivity {
 
     public void calcular() {
 
-        if(tv_expressao.getText().toString().length() > 1) {
-            numbers.add(Double.parseDouble(lastDigit));
-            lastDigit = "";
+        if(tvExpressao.getText().toString().length() > 1) {
+            numeros.add(Double.parseDouble(ultimoDigito));
+            ultimoDigito = "";
 
-            System.out.println(numbers.toString());
-            System.out.println(operators.toString());
-
-            char last_char = tv_expressao.getText().toString().charAt(tv_expressao.getText().toString().length() - 1);
+            char ultimoCaractere = tvExpressao.getText().toString().charAt(tvExpressao.getText().toString().length() - 1);
 
             if (
-                    (last_char == '+') ||
-                            (last_char == '-') ||
-                            (last_char == '×') ||
-                            (last_char == '÷')
+                    (ultimoCaractere == '+') ||
+                            (ultimoCaractere == '-') ||
+                            (ultimoCaractere == '×') ||
+                            (ultimoCaractere == '÷') ||
+                            (ultimoCaractere == '^')
             ) {
                 return;
             } else {
-                while (operators.size() > 0) {
-                    for (int i = 0; i < operators.size(); i++) {
+                while (operadores.size() > 0) {
+
+                    for (int i = 0; i < operadores.size(); i++) {
 
                         double agregado = 0;
 
-                        switch (operators.get(i)) {
-                            case '×':
-                                agregado += calcs.multiplication(numbers.get(i), numbers.get(i + 1));
-                                break;
-                            case '÷':
-                                agregado += calcs.division(numbers.get(i), numbers.get(i + 1));
+                        switch (operadores.get(i)) {
+                            case '^':
+                                agregado += Math.pow(numeros.get(i), numeros.get(i + 1));
                                 break;
                             default:
                                 continue;
                         }
 
-                        numbers.set(i, agregado);
-                        numbers.remove(i + 1);
-                        operators.remove(i);
+                        numeros.set(i, agregado);
+                        numeros.remove(i + 1);
+                        operadores.remove(i);
 
-                        System.out.println(numbers.toString());
-                        System.out.println(operators.toString());
+                        i = 0;
 
                     }
 
-                    for (int i = 0; i < operators.size(); i++) {
+                    for (int i = 0; i < operadores.size(); i++) {
 
                         double agregado = 0;
 
-                        switch (operators.get(i)) {
-                            case '+':
-                                agregado += calcs.addition(numbers.get(i), numbers.get(i + 1));
+                        switch (operadores.get(i)) {
+                            case '×':
+                                agregado += numeros.get(i) * numeros.get(i + 1);
                                 break;
-                            case '-':
-                                agregado += calcs.subtraction(numbers.get(i), numbers.get(i + 1));
+                            case '÷':
+                                agregado += numeros.get(i) / numeros.get(i + 1);
                                 break;
                             default:
                                 continue;
                         }
 
-                        numbers.set(i, agregado);
-                        numbers.remove(i + 1);
-                        operators.remove(i);
+                        numeros.set(i, agregado);
+                        numeros.remove(i + 1);
+                        operadores.remove(i);
 
-                        System.out.println(numbers.toString());
-                        System.out.println(operators.toString());
+                        i = 0;
+
+                    }
+
+                    for (int i = 0; i < operadores.size(); i++) {
+
+                        double agregado = 0;
+
+                        switch (operadores.get(i)) {
+                            case '+':
+                                agregado += numeros.get(i) + numeros.get(i + 1);
+                                break;
+                            case '-':
+                                agregado += numeros.get(i) - numeros.get(i + 1);
+                                break;
+                            default:
+                                continue;
+                        }
+
+                        numeros.set(i, agregado);
+                        numeros.remove(i + 1);
+                        operadores.remove(i);
+
+                        i = 0;
 
                     }
 
                 }
 
-                tv_expressao.setText(Double.toString(numbers.get(0)));
+                ultimoDigito = numeros.get(0).toString();
+                tvExpressao.setText(Double.toString(numeros.get(0)));
+
+                operadores.clear();
+                numeros.clear();
 
             }
         }
