@@ -7,10 +7,7 @@ Neste aplicativo podem ser realizadas as 4 operações básicas da aritmética a
 O layout foi feito usando o componente ConstraintLayout.
 
 <p float="left">
-  <img src="./pics/tela_1.jpg" width="300" />
-</p>
-
-<p float="right">
-  <img src="./pics/tela_2.jpg" width="300" />
+  <img src="./pics/tela_1.jpg" width="200" />
+  <img src="./pics/tela_2.jpg" width="200" />
 </p>
 
