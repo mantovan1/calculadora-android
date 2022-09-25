@@ -1,6 +1,6 @@
 # Calculadora
 
-Um app de calculadora bem simples feito com Android SDK na IDE Android Studio.
+Uma calculadora bem simples feita com o Android SDK.
 
 Neste aplicativo podem ser realizadas as 4 operações básicas da aritmética além de potências. Este app suporta expressões com mais de 3 termos porém alguns bugs podem ocorrer com expressões mais complexas.
 
