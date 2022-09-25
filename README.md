@@ -1,4 +1,4 @@
-# App Calculadora
+# Calculadora
 
 Um app de calculadora bem simples feito com Android SDK na IDE Android Studio.
 
